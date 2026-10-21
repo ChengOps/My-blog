@@ -2,6 +2,7 @@ import { siteConfig } from "../../site.config";
 import Link from "next/link";
 import { PostList } from "@/components/post-list";
 import { getPosts, getTags } from "@/lib/posts";
+import { tagPath } from "@/lib/urls";
 
 export default function Home() {
   const posts = getPosts();
@@ -24,7 +25,7 @@ export default function Home() {
       </section>
       <section className="topics-section" aria-labelledby="topics-heading">
         <div className="section-heading"><h2 id="topics-heading">循着主题阅读</h2><span className="eyebrow">EXPLORE BY TOPIC</span></div>
-        <div className="topics">{getTags().map(({ tag, count }) => <Link className="pill" href={`/tags/${encodeURIComponent(tag)}`} key={tag}>{tag} <span className="ml-1">{count}</span></Link>)}</div>
+        <div className="topics">{getTags().map(({ tag, count }) => <Link className="pill" href={tagPath(tag)} key={tag}>{tag} <span className="ml-1">{count}</span></Link>)}</div>
       </section>
     </>
   );

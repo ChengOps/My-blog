@@ -5,7 +5,7 @@ import { ThemeToggle } from "./theme-toggle";
 export function Header() {
   return (
     <header className="site-header shell">
-      <Link className="brand" href="/" aria-label={`${siteConfig.name}，首页`}>
+      <Link className="brand" href="/" aria-label={`${siteConfig.name}. 首页`}>
         <span className="brand-mark" aria-hidden="true">{siteConfig.name.slice(0, 1)}</span>{siteConfig.name}.
       </Link>
       <nav className="main-nav" aria-label="主导航">

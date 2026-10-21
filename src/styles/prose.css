@@ -3,7 +3,7 @@
 .article-header h1 { font-size: clamp(30px, 4.5vw, 44px); line-height: 1.4; font-weight: 600; letter-spacing: -0.035em; margin: 16px 0; }
 .article-summary { color: var(--muted); font-size: 17px; line-height: 1.75; }
 .article-body-layout { display: grid; grid-template-columns: minmax(0, 68ch) minmax(0, 200px); gap: 80px; border-top: 1px solid var(--border); padding-top: 40px; }
-.article-content { min-width: 0; }
+.article-content { min-width: 0; grid-column: 1; grid-row: 1; }
 .prose { max-width: 68ch; font-size: 18px; line-height: 1.75; line-break: strict; }
 .prose > * + * { margin-top: 1.25em; }
 .prose h2 { font-size: 27px; font-weight: 600; line-height: 1.5; letter-spacing: -0.025em; margin-top: 2em; }
@@ -31,7 +31,7 @@
 .prose th { font-weight: 600; background: var(--surface); }
 .prose tr:last-child td { border-bottom: 0; }
 .prose hr { border: 0; border-top: 1px solid var(--border); margin-block: 2em; }
-.toc { position: sticky; top: 30px; align-self: start; font-size: 13px; }
+.toc { position: sticky; top: 30px; align-self: start; font-size: 13px; grid-column: 2; grid-row: 1; }
 .toc summary { font-weight: 600; list-style: none; margin-bottom: 14px; cursor: pointer; }
 .toc summary::-webkit-details-marker { display: none; }
 .toc ol { list-style: none; border-left: 1px solid var(--border); padding: 0 0 0 16px; margin: 0; color: var(--muted); }
@@ -46,7 +46,8 @@
 @media (max-width: 900px) {
   .article-body-layout { grid-template-columns: minmax(0, 1fr); gap: 32px; }
   .article-header, .article-body-layout { max-width: 68ch; margin-inline: auto; }
-  .toc { position: static; grid-row: 1; background: var(--surface); border: 1px solid var(--border); padding: 14px 18px; border-radius: 6px; }
+  .toc { position: static; grid-column: 1; grid-row: auto; background: var(--surface); border: 1px solid var(--border); padding: 14px 18px; border-radius: 6px; }
+  .article-content { grid-row: auto; }
   .toc summary::after { content: " ↕"; float: right; color: var(--muted); }
   .toc details:not([open]) summary { margin: 0; }
 }

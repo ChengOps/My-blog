@@ -6,6 +6,7 @@ import { PostNavigation } from "@/components/post-navigation";
 import { getPost, getPosts, formatDate } from "@/lib/posts";
 import { renderPost } from "@/lib/mdx";
 import { pageMetadata } from "@/lib/seo";
+import { tagPath } from "@/lib/urls";
 
 type Props = { params: Promise<{ slug: string }> };
 export const dynamicParams = false;
@@ -30,15 +31,15 @@ export default async function PostPage({ params }: Props) {
         <div className="post-meta mt-8"><time dateTime={post.date}>{formatDate(post.date)}</time><span aria-hidden="true">/</span><span>{post.readingMinutes} 分钟阅读</span></div>
         <h1>{post.title}</h1>
         <p className="article-summary">{post.summary}</p>
-        <div className="topics mt-5">{post.tags.map((tag) => <Link key={tag} className="pill" href={`/tags/${encodeURIComponent(tag)}`}>{tag}</Link>)}</div>
+        <div className="topics mt-5">{post.tags.map((tag) => <Link key={tag} className="pill" href={tagPath(tag)}>{tag}</Link>)}</div>
       </header>
       <div className="article-body-layout">
+        <TableOfContents entries={toc} />
         <div className="article-content">
           <div className="prose">{content}</div>
           <p className="article-end"><span aria-hidden="true">◇</span> 谢谢你读到这里。</p>
           <PostNavigation previous={posts[index + 1]} next={posts[index - 1]} />
         </div>
-        <TableOfContents entries={toc} />
       </div>
     </article>
   );

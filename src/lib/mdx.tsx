@@ -13,7 +13,7 @@ export async function renderPost(source: string) {
       mdxOptions: {
         remarkPlugins: [remarkGfm],
         rehypePlugins: [rehypeHeadings(toc), [rehypePrettyCode, {
-          theme: { light: "github-light", dark: "github-dark" },
+          theme: { light: "github-light-high-contrast", dark: "github-dark-high-contrast" },
           keepBackground: false,
         }]],
       },

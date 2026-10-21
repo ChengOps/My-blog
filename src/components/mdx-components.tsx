@@ -9,6 +9,7 @@ function MdxImage({ src, alt, width, height }: ComponentProps<"img">) {
 export const mdxComponents = {
   img: MdxImage,
   Image: MdxImage,
+  pre: (props: ComponentProps<"pre">) => <pre {...props} tabIndex={0} aria-label="代码示例，可横向滚动" />,
   table: (props: ComponentProps<"table">) => (
     <div className="table-scroll" role="region" aria-label="可横向滚动的表格" tabIndex={0}><table {...props} /></div>
   ),

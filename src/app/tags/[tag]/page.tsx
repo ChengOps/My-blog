@@ -4,19 +4,26 @@ import { PostList } from "@/components/post-list";
 import { TagFilter } from "@/components/tag-filter";
 import { getPosts, getTags } from "@/lib/posts";
 import { pageMetadata } from "@/lib/seo";
+import { tagPath, tagSegment } from "@/lib/urls";
 
 type Props = { params: Promise<{ tag: string }> };
 export const dynamicParams = false;
-export function generateStaticParams() { return getTags().map(({ tag }) => ({ tag })); }
+export function generateStaticParams() { return getTags().map(({ tag }) => ({ tag: tagSegment(tag) })); }
+
+async function resolveTag(params: Props["params"]): Promise<string> {
+  const { tag: parameter } = await params;
+  const match = getTags().find(({ tag }) => tagSegment(tag) === parameter);
+  if (!match) notFound();
+  return match.tag;
+}
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { tag } = await params;
-  if (!getTags().some((entry) => entry.tag === tag)) notFound();
-  return pageMetadata({ title: `${tag} · 标签`, description: `阅读「${tag}」主题下的全部文章。`, path: `/tags/${encodeURIComponent(tag)}` });
+  const tag = await resolveTag(params);
+  return pageMetadata({ title: `${tag} · 标签`, description: `阅读「${tag}」主题下的全部文章。`, path: tagPath(tag) });
 }
 
 export default async function TagPage({ params }: Props) {
-  const { tag } = await params;
+  const tag = await resolveTag(params);
   const posts = getPosts().filter((post) => post.tags.includes(tag));
   if (!posts.length) notFound();
   return <>
