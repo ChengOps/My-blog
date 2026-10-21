@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "../styles/components.css";
+@import "../styles/prose.css";
 
 :root {
   --background: #fafaf8;

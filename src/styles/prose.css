@@ -1,0 +1,60 @@
+.article-page { padding-top: 48px; }
+.article-header { max-width: 68ch; padding-bottom: 40px; }
+.article-header h1 { font-size: clamp(30px, 4.5vw, 44px); line-height: 1.4; font-weight: 600; letter-spacing: -0.035em; margin: 16px 0; }
+.article-summary { color: var(--muted); font-size: 17px; line-height: 1.75; }
+.article-body-layout { display: grid; grid-template-columns: minmax(0, 68ch) minmax(0, 200px); gap: 80px; border-top: 1px solid var(--border); padding-top: 40px; }
+.article-content { min-width: 0; }
+.prose { max-width: 68ch; font-size: 18px; line-height: 1.75; line-break: strict; }
+.prose > * + * { margin-top: 1.25em; }
+.prose h2 { font-size: 27px; font-weight: 600; line-height: 1.5; letter-spacing: -0.025em; margin-top: 2em; }
+.prose h3 { font-size: 21px; font-weight: 600; margin-top: 1.8em; }
+.prose > :first-child { margin-top: 0; }
+.prose a { color: var(--accent); text-decoration: underline; }
+.prose ul, .prose ol { padding-left: 1.5em; }
+.prose ul { list-style: disc; }
+.prose ol { list-style: decimal; }
+.prose li + li { margin-top: 0.5em; }
+.prose blockquote { margin-inline: 0; padding: 15px 22px; border-left: 3px solid var(--accent); background: var(--surface); color: var(--muted); }
+.prose img { display: block; max-width: 100%; height: auto; border-radius: 6px; }
+.prose code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace; font-size: 0.85em; overflow-wrap: anywhere; }
+.prose :not(pre) > code { padding: 0.16em 0.35em; background: var(--surface); border: 1px solid var(--border); border-radius: 4px; }
+.prose pre { background: var(--surface); border: 1px solid var(--border); border-radius: 7px; padding: 20px; overflow-x: auto; max-width: 100%; font-size: 14px; line-height: 1.8; tab-size: 2; }
+.prose pre code { font-size: inherit; overflow-wrap: normal; }
+.prose pre [data-line] { padding-right: 20px; }
+.prose [data-rehype-pretty-code-title] { font-size: 12px; color: var(--muted); padding: 10px 20px; border: 1px solid var(--border); border-bottom: 0; border-radius: 7px 7px 0 0; background: var(--surface); font-family: Consolas, monospace; }
+.prose [data-rehype-pretty-code-title] + pre { border-radius: 0 0 7px 7px; }
+.prose pre span { color: var(--shiki-light); }
+[data-theme="dark"] .prose pre span { color: var(--shiki-dark); }
+.table-scroll { overflow-x: auto; max-width: 100%; border: 1px solid var(--border); border-radius: 6px; }
+.prose table { width: 100%; border-collapse: collapse; font-size: 15px; white-space: normal; min-width: 420px; }
+.prose th, .prose td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); }
+.prose th { font-weight: 600; background: var(--surface); }
+.prose tr:last-child td { border-bottom: 0; }
+.prose hr { border: 0; border-top: 1px solid var(--border); margin-block: 2em; }
+.toc { position: sticky; top: 30px; align-self: start; font-size: 13px; }
+.toc summary { font-weight: 600; list-style: none; margin-bottom: 14px; cursor: pointer; }
+.toc summary::-webkit-details-marker { display: none; }
+.toc ol { list-style: none; border-left: 1px solid var(--border); padding: 0 0 0 16px; margin: 0; color: var(--muted); }
+.toc li + li { margin-top: 10px; }
+.toc .toc-subheading { padding-left: 12px; font-size: 12px; }
+.article-end { color: var(--muted); font-size: 13px; margin-block: 48px; display: flex; align-items: center; gap: 10px; }
+.article-end span { color: var(--accent); }
+.post-navigation { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; padding-top: 26px; border-top: 1px solid var(--border); }
+.post-navigation span { color: var(--muted); font-size: 12px; display: block; margin-bottom: 8px; }
+.post-navigation strong { font-size: 15px; font-weight: 500; }
+.next-post { text-align: right; }
+@media (max-width: 900px) {
+  .article-body-layout { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+  .article-header, .article-body-layout { max-width: 68ch; margin-inline: auto; }
+  .toc { position: static; grid-row: 1; background: var(--surface); border: 1px solid var(--border); padding: 14px 18px; border-radius: 6px; }
+  .toc summary::after { content: " ↕"; float: right; color: var(--muted); }
+  .toc details:not([open]) summary { margin: 0; }
+}
+@media (max-width: 640px) {
+  .article-page { padding-top: 30px; }
+  .article-header { padding-bottom: 28px; }
+  .article-body-layout { padding-top: 24px; }
+  .prose { font-size: 17px; }
+  .prose h2 { font-size: 24px; }
+  .prose pre { padding: 16px; font-size: 13px; }
+}
