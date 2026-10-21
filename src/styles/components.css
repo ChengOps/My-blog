@@ -1,0 +1,55 @@
+.site-header { display: flex; justify-content: space-between; align-items: center; height: 100px; border-bottom: 1px solid var(--border); }
+.brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 650; font-size: 21px; letter-spacing: -0.05em; }
+.brand-mark { display: grid; place-items: center; width: 28px; height: 28px; background: var(--foreground); color: var(--background); font-size: 17px; border-radius: 6px; letter-spacing: -0.1em; padding-right: 2px; }
+.main-nav { display: flex; align-items: center; gap: 30px; font-size: 14px; }
+.nav-link { color: var(--muted); }
+.nav-link[aria-current="page"] { color: var(--foreground); }
+.theme-toggle { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 6px 9px; min-width: 44px; min-height: 44px; border: 1px solid var(--border); background: transparent; border-radius: 6px; font-size: 12px; }
+.theme-toggle:hover { background: var(--surface); }
+.site-footer { border-top: 1px solid var(--border); padding-block: 28px; display: flex; justify-content: space-between; gap: 20px; color: var(--muted); font-size: 12px; }
+.footer-links { display: flex; gap: 24px; }
+.hero { padding: 76px 0 68px; }
+.hero-grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: 80px; align-items: end; margin-top: 28px; }
+.hero h1 { font-size: clamp(42px, 6vw, 68px); line-height: 1.24; font-weight: 600; letter-spacing: -0.06em; }
+.hero h1 span { color: var(--muted); }
+.hero-description { font-size: 16px; color: var(--muted); max-width: 34ch; margin-bottom: 12px; }
+.hero-note { margin-top: 34px; display: flex; align-items: center; gap: 9px; color: var(--muted); font-size: 12px; }
+.status-dot { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; }
+.home-latest { border-top: 1px solid var(--border); padding-top: 28px; }
+.empty-state { border-block: 1px solid var(--border); padding: 50px 0; color: var(--muted); }
+.post-row { display: grid; grid-template-columns: 140px minmax(0, 1fr) 30px; gap: 20px; padding: 29px 0; border-bottom: 1px solid var(--border); }
+.post-date { color: var(--muted); font-size: 13px; padding-top: 4px; font-variant-numeric: tabular-nums; }
+.post-title { font-size: 22px; font-weight: 600; letter-spacing: -0.025em; line-height: 1.5; }
+.post-summary { color: var(--muted); font-size: 14px; margin: 9px 0 16px; max-width: 64ch; }
+.post-meta { display: flex; align-items: center; gap: 9px; flex-wrap: wrap; font-size: 12px; color: var(--muted); }
+.post-arrow { color: var(--muted); padding-top: 4px; font-size: 20px; }
+.post-row:focus-within .post-arrow, .post-row:hover .post-arrow { color: var(--accent); }
+.topics { display: flex; flex-wrap: wrap; gap: 8px; }
+.topics-section { margin-top: 48px; }
+.filter-bar { padding-bottom: 24px; border-bottom: 1px solid var(--border); display: flex; flex-wrap: wrap; gap: 8px; }
+.about-layout { display: grid; grid-template-columns: minmax(0, 68ch) 1fr; gap: 80px; padding-top: 60px; }
+.about-aside { padding-top: 12px; }
+.about-aside img { border-radius: 14px; margin-bottom: 18px; }
+.about-aside p { font-size: 14px; color: var(--muted); margin: 6px 0; }
+.error-page { padding-block: 90px; max-width: 620px; }
+.error-page h1 { font-size: 46px; letter-spacing: -0.05em; margin: 16px 0; }
+.error-page p { margin-bottom: 28px; color: var(--muted); }
+@media (max-width: 800px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 26px; }
+  .hero-description { max-width: 46ch; }
+  .about-layout { grid-template-columns: 1fr; gap: 32px; }
+}
+@media (max-width: 640px) {
+  .site-header { height: 80px; }
+  .main-nav { gap: 20px; }
+  .theme-label { display: none; }
+  .hero { padding-block: 48px; }
+  .hero-grid { margin-top: 22px; }
+  .hero-note { margin-top: 24px; }
+  .post-row { grid-template-columns: minmax(0, 1fr) 24px; gap: 12px; padding-block: 24px; }
+  .post-date { grid-column: 1 / -1; padding: 0; font-size: 12px; }
+  .post-title { font-size: 20px; }
+  .post-summary { font-size: 14px; }
+  .site-footer { flex-direction: column; gap: 12px; }
+  .error-page h1 { font-size: 36px; }
+}
