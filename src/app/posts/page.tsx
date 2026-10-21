@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import { PostList } from "@/components/post-list";
 import { TagFilter } from "@/components/tag-filter";
 import { getPosts } from "@/lib/posts";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = { title: "全部文章", description: "按时间整理的前端、AI 与阅读笔记。选择一个主题，慢慢读。" };
+export const metadata: Metadata = pageMetadata({ title: "全部文章", description: "按时间整理的前端、AI 与阅读笔记。选择一个主题，慢慢读。", path: "/posts" });
 
 export default function PostsPage() {
   return <>

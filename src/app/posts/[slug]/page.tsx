@@ -5,6 +5,7 @@ import { TableOfContents } from "@/components/toc";
 import { PostNavigation } from "@/components/post-navigation";
 import { getPost, getPosts, formatDate } from "@/lib/posts";
 import { renderPost } from "@/lib/mdx";
+import { pageMetadata } from "@/lib/seo";
 
 type Props = { params: Promise<{ slug: string }> };
 export const dynamicParams = false;
@@ -13,7 +14,7 @@ export function generateStaticParams() { return getPosts().map(({ slug }) => ({ 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = getPost((await params).slug);
   if (!post) notFound();
-  return { title: post.title, description: post.summary };
+  return pageMetadata({ title: post.title, description: post.summary, path: `/posts/${post.slug}`, date: post.date, tags: post.tags });
 }
 
 export default async function PostPage({ params }: Props) {

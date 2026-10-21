@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { siteConfig } from "../../../site.config";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = { title: "关于", description: `关于 ${siteConfig.name}，以及这个记录代码、AI 与阅读的数字花园。` };
+export const metadata: Metadata = pageMetadata({ title: "关于", description: `关于 ${siteConfig.name}，以及这个记录代码、AI 与阅读的数字花园。`, path: "/about" });
 
 export default function AboutPage() {
   return (

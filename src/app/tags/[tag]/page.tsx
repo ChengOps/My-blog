@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { PostList } from "@/components/post-list";
 import { TagFilter } from "@/components/tag-filter";
 import { getPosts, getTags } from "@/lib/posts";
+import { pageMetadata } from "@/lib/seo";
 
 type Props = { params: Promise<{ tag: string }> };
 export const dynamicParams = false;
@@ -11,7 +12,7 @@ export function generateStaticParams() { return getTags().map(({ tag }) => ({ ta
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { tag } = await params;
   if (!getTags().some((entry) => entry.tag === tag)) notFound();
-  return { title: `${tag} · 标签`, description: `阅读「${tag}」主题下的全部文章。` };
+  return pageMetadata({ title: `${tag} · 标签`, description: `阅读「${tag}」主题下的全部文章。`, path: `/tags/${encodeURIComponent(tag)}` });
 }
 
 export default async function TagPage({ params }: Props) {

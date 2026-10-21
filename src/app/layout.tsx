@@ -2,11 +2,14 @@ import type { Metadata } from "next";
 import { siteConfig } from "../../site.config";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
+import { pageMetadata } from "@/lib/seo";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  ...pageMetadata({ title: siteConfig.title, description: siteConfig.description, path: "/" }),
+  metadataBase: new URL(siteConfig.url),
   title: { default: siteConfig.title, template: `%s · ${siteConfig.name}` },
-  description: siteConfig.description,
+  authors: [{ name: siteConfig.name }],
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
