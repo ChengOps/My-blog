@@ -7,6 +7,16 @@
 .nav-link[aria-current="page"] { color: var(--accent); }
 .theme-toggle { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 6px 9px; min-width: 44px; min-height: 44px; border: 1px solid var(--border-ui); background: var(--background); color: var(--accent); border-radius: 6px; font-size: 12px; }
 .theme-toggle:hover { background: var(--surface-2); color: var(--highlight); }
+.theme-icons { display: grid; width: 16px; height: 16px; }
+.theme-icon {
+  grid-area: 1 / 1;
+  opacity: 0;
+  transform: rotate(-180deg);
+  transition: transform var(--dur-base) var(--ease-feedback), opacity var(--dur-base) var(--ease-feedback);
+}
+[data-theme-choice="dark"] .theme-icon-moon,
+[data-theme-choice="light"] .theme-icon-sun,
+[data-theme-choice="system"] .theme-icon-system { opacity: 1; transform: rotate(0deg); }
 .site-footer { border-top: 1px solid var(--border); padding-block: 28px; display: flex; justify-content: space-between; gap: 20px; color: var(--muted); font-size: 12px; }
 .footer-links { display: flex; gap: 24px; }
 .hero { padding: 76px 0 68px; }
@@ -18,7 +28,8 @@
 .status-dot { width: 6px; height: 6px; background: var(--muted); border-radius: 50%; }
 .home-latest { border-top: 1px solid var(--border); padding-top: 28px; }
 .empty-state { border-block: 1px solid var(--border); padding: 50px 0; color: var(--muted); }
-.post-row { display: grid; grid-template-columns: 140px minmax(0, 1fr) 30px; gap: 20px; padding: 29px 0; border-bottom: 1px solid var(--border); }
+.post-row { display: grid; grid-template-columns: 140px minmax(0, 1fr) 30px; gap: 20px; padding: 29px 0; border-bottom: 1px solid var(--border); cursor: pointer; transform: translateY(var(--card-lift, 0px)) scale(var(--press-scale, 1)); }
+.post-row[data-navigating] { --card-lift: -2px; border-color: var(--card-feedback-border); }
 .post-date { color: var(--muted); font-size: 13px; padding-top: 4px; font-variant-numeric: tabular-nums; }
 .post-title { font-size: 22px; font-weight: 600; letter-spacing: -0.025em; line-height: 1.5; }
 .post-title a, .post-title a:hover { color: var(--foreground); }
