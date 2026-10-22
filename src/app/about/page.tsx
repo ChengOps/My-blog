@@ -24,7 +24,7 @@ export default function AboutPage() {
         <Link className="text-link inline-block mt-10" href="/posts">从一篇文章开始 →</Link>
       </article>
       <aside className="about-aside" aria-label="作者名片">
-        <Image src={siteConfig.avatar} width={80} height={80} alt={`${siteConfig.name} 的字母头像`} />
+        <Image src={siteConfig.avatar} width={80} height={80} alt={`${siteConfig.name} 的头像`} />
         <h2 className="font-semibold">{siteConfig.name}</h2><p>开发者 · 阅读者 · 记录者</p><p>保持好奇，持续记录。</p>
         <a className="text-link inline-block mt-4" href={siteConfig.social.github}>GitHub ↗</a>
       </aside>

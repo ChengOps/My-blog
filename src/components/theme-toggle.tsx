@@ -12,13 +12,13 @@ function applyTheme(theme: Theme) {
 }
 
 export function ThemeToggle() {
-  const [theme, setTheme] = useState<Theme>("system");
+  const [theme, setTheme] = useState<Theme>("dark");
 
   useEffect(() => {
-    let saved: Theme = "system";
+    let saved: Theme = "dark";
     try {
       const value = localStorage.getItem("theme");
-      if (value === "light" || value === "dark") saved = value;
+      if (value === "light" || value === "dark" || value === "system") saved = value;
     } catch { /* Storage can be unavailable in private browsing. */ }
     setTheme(saved);
     applyTheme(saved);
