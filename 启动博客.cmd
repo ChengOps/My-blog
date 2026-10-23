@@ -11,11 +11,9 @@ set NODE=node
 where node >nul 2>nul || set NODE="C:\Users\Hush\.dsh\dsh-runtimes\dsh-primary-runtime\dependencies\node\bin\node.exe"
 
 if not exist ".next\BUILD_ID" (
-  echo   [!] 还没有服务端构建产物，先构建一次（约 30 秒）
+  echo   [!] 还没有生产构建，先构建一次（约 30 秒）
   echo.
-  set NEXT_OUTPUT=server
   %NODE% "node_modules\next\dist\bin\next" build
-  set NEXT_OUTPUT=
   if not exist ".next\BUILD_ID" (
     echo.
     echo   [x] 构建失败，请把上面的报错发给我。
