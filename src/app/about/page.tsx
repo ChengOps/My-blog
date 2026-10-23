@@ -19,7 +19,14 @@ export default function AboutPage() {
           <h2>你可以读到什么</h2>
           <ul><li>前端：页面体验、工程实践与可维护的代码。</li><li>AI：把工具放进真实工作流之后的观察与反思。</li><li>阅读：书页与生活之间，值得留下的联系。</li></ul>
           <h2>保持联系</h2>
-          <p>如果某篇文章让你想到一个问题，欢迎通过<a href={`mailto:${siteConfig.email}`}>邮件</a>交流。也可以订阅 <a href="/feed.xml">RSS</a>，在自己喜欢的阅读器里接收更新。</p>
+          <p>
+            {siteConfig.email ? (
+              <>如果某篇文章让你想到一个问题，欢迎通过<a href={`mailto:${siteConfig.email}`}>邮件</a>交流。</>
+            ) : (
+              <>如果某篇文章让你想到一个问题，欢迎在留言栏里写下来。</>
+            )}
+            也可以订阅 <a href="/feed.xml">RSS</a>，在自己喜欢的阅读器里接收更新。
+          </p>
           <p>也欢迎在<Link href="/guestbook">留言栏</Link>留一句话，或到文章下方继续讨论。</p>
         </div>
         <Link className="text-link inline-block mt-10" href="/posts">从一篇文章开始 →</Link>
@@ -27,7 +34,9 @@ export default function AboutPage() {
       <aside className="about-aside" aria-label="作者名片">
         <Image src={siteConfig.avatar} width={80} height={80} alt={`${siteConfig.name} 的头像`} />
         <h2 className="font-semibold">{siteConfig.name}</h2><p>开发者 · 阅读者 · 记录者</p><p>保持好奇，持续记录。</p>
-        <a className="text-link inline-block mt-4" href={siteConfig.social.github}>GitHub ↗</a>
+        {siteConfig.social.github ? (
+          <a className="text-link inline-block mt-4" href={siteConfig.social.github}>GitHub ↗</a>
+        ) : null}
       </aside>
     </div>
   );
