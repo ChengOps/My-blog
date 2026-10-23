@@ -1,0 +1,16 @@
+:root[data-route-reveal] .route-fade[data-route-enter] { animation: none; }
+:root .route-fade[data-route-native] { animation: none; }
+:root[data-route-reveal]::view-transition { pointer-events: none; }
+:root[data-route-reveal]::view-transition-group(root) { animation: none; }
+:root[data-route-reveal]::view-transition-image-pair(root) { isolation: auto; }
+:root[data-route-reveal]::view-transition-old(root),
+:root[data-route-reveal]::view-transition-new(root) { mix-blend-mode: normal; }
+:root[data-route-reveal]::view-transition-old(root) { animation: none; z-index: 1; }
+:root[data-route-reveal]::view-transition-new(root) {
+  z-index: 2;
+  animation: route-reveal var(--dur-slow) var(--ease-feedback) both;
+}
+@keyframes route-reveal {
+  from { clip-path: circle(0px at var(--route-x) var(--route-y)); }
+  to { clip-path: circle(var(--route-radius) at var(--route-x) var(--route-y)); }
+}

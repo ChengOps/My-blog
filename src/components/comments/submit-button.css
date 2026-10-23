@@ -1,0 +1,38 @@
+.comment-send-shell { position: relative; display: inline-grid; max-width: 100%; margin-top: 22px; vertical-align: top; }
+.guestbook-page .comment-submit.comment-send { position: relative; margin-top: 0; border-color: var(--transparent); background: var(--transparent); }
+.guestbook-page .comment-send:hover:not(:disabled) { background: var(--transparent); }
+.comment-send-surface { position: absolute; inset: 0; border: 1px solid var(--border-ui); border-radius: inherit; background: var(--background); z-index: -2; transition: transform var(--dur-base) var(--ease-feedback), opacity var(--dur-fast) var(--ease-feedback); }
+.comment-send:hover:not(:disabled) .comment-send-surface { background: var(--surface-2); }
+.comment-send-label { transition: transform var(--dur-fast) var(--ease-feedback), opacity var(--dur-fast) var(--ease-feedback); transition-delay: var(--dur-fast); }
+.comment-send-circle { position: absolute; left: 50%; top: 50%; width: var(--send-diameter, 44px); height: var(--send-diameter, 44px); border-radius: 50%; background: var(--accent); opacity: 0; transform: translate(-50%, -50%) scale(0.85); z-index: -1; transition: opacity var(--dur-fast) var(--ease-feedback), transform var(--dur-base) var(--ease-feedback); }
+.comment-send .guestbook-send-icon { transition: transform var(--dur-base) var(--ease-feedback), opacity var(--dur-fast) var(--ease-feedback); }
+.comment-send-shell:is([data-state="sending"], [data-state="success"]) .comment-send-surface { transform: scaleX(var(--send-collapse, 0.3)); opacity: 0; transition-delay: 0ms, var(--dur-base); }
+.comment-send-shell:is([data-state="sending"], [data-state="success"]) .comment-send-label { opacity: 0; transform: translateY(4px); transition-delay: 0ms; }
+.guestbook-page .comment-send-shell:is([data-state="sending"], [data-state="success"]) .guestbook-send-icon { opacity: 0; transform: translate(12px, -12px); animation: none; }
+.comment-send-shell:is([data-state="sending"], [data-state="success"]) .comment-send-circle { opacity: 1; transform: translate(-50%, -50%) scale(1); transition-delay: var(--dur-base); }
+.comment-send-spinner { position: absolute; left: calc(50% - 8px); top: calc(50% - 8px); width: 16px; height: 16px; border: 1.5px solid var(--background); border-right-color: var(--transparent); border-radius: 50%; opacity: 0; transition: opacity var(--dur-fast) var(--ease-feedback); }
+.comment-send-shell[data-state="sending"] .comment-send-spinner { opacity: 1; transition-delay: var(--dur-base); animation: comment-send-spin var(--dur-slow) linear infinite; animation-delay: var(--dur-base); }
+.comment-send-tick { position: absolute; left: calc(50% - 9px); top: calc(50% - 9px); width: 18px; height: 18px; }
+.comment-send-tick::before, .comment-send-tick::after { content: ""; position: absolute; height: 2px; border-radius: 1px; background: var(--background); transform-origin: left center; }
+.comment-send-tick::before { left: 2px; top: 8px; width: 6px; transform: rotate(45deg) scaleX(0); }
+.comment-send-tick::after { left: 6px; top: 12px; width: 12px; transform: rotate(-45deg) scaleX(0); }
+.comment-send-shell[data-state="success"] .comment-send-tick::before { transform: rotate(45deg) scaleX(1); animation: comment-send-short var(--dur-fast) var(--ease-feedback) var(--dur-base) backwards; }
+.comment-send-shell[data-state="success"] .comment-send-tick::after { transform: rotate(-45deg) scaleX(1); animation: comment-send-long var(--dur-base) var(--ease-feedback) calc(var(--dur-base) + var(--dur-fast)) backwards; }
+.comment-send-burst { position: absolute; left: 50%; top: 50%; width: 0; height: 0; pointer-events: none; }
+.comment-send-burst i { position: absolute; width: 3px; height: 3px; border-radius: 50%; background: var(--accent); opacity: 0; }
+.comment-send-burst i:nth-child(even) { background: var(--secondary); }
+.comment-send-burst i:nth-child(1) { --send-dx: -32px; --send-dy: -20px; }
+.comment-send-burst i:nth-child(2) { --send-dx: 0px; --send-dy: -34px; }
+.comment-send-burst i:nth-child(3) { --send-dx: 32px; --send-dy: -20px; }
+.comment-send-burst i:nth-child(4) { --send-dx: 32px; --send-dy: 20px; }
+.comment-send-burst i:nth-child(5) { --send-dx: 0px; --send-dy: 34px; }
+.comment-send-burst i:nth-child(6) { --send-dx: -32px; --send-dy: 20px; }
+.comment-send-shell[data-state="success"] .comment-send-burst i { animation: comment-send-burst var(--dur-slow) var(--ease-feedback) calc(var(--dur-base) + var(--dur-fast) + var(--dur-base)) both; }
+.comment-send-shell[data-state="error"] { animation: comment-send-error var(--dur-base) var(--ease-feedback); }
+[data-hush="on"] .comment-send-shell *, [data-hush="on"] .comment-send-shell *::before, [data-hush="on"] .comment-send-shell *::after { animation-delay: 0ms !important; transition-delay: 0ms !important; }
+@keyframes comment-send-spin { to { transform: rotate(360deg); } }
+@keyframes comment-send-short { from { transform: rotate(45deg) scaleX(0); } to { transform: rotate(45deg) scaleX(1); } }
+@keyframes comment-send-long { from { transform: rotate(-45deg) scaleX(0); } to { transform: rotate(-45deg) scaleX(1); } }
+@keyframes comment-send-burst { 0% { opacity: 0; transform: translate(0, 0) scale(0.5); } 25% { opacity: 0.65; } 100% { opacity: 0; transform: translate(var(--send-dx), var(--send-dy)) scale(0.5); } }
+@keyframes comment-send-error { 0%, 100% { transform: translateX(0); } 30% { transform: translateX(-3px); } 65% { transform: translateX(3px); } }
+@media (max-width: 640px) { .comment-send-shell { width: 100%; } }

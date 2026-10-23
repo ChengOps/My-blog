@@ -4,6 +4,7 @@ import rehypePrettyCode from "rehype-pretty-code";
 import { mdxComponents } from "@/components/mdx-components";
 import { rehypeHeadings, type TocEntry } from "./headings";
 import { codeTheme } from "./code-theme";
+import { remarkPullQuotes } from "./pull-quotes";
 
 export async function renderPost(source: string) {
   const toc: TocEntry[] = [];
@@ -12,7 +13,7 @@ export async function renderPost(source: string) {
     components: mdxComponents,
     options: {
       mdxOptions: {
-        remarkPlugins: [remarkGfm],
+        remarkPlugins: [remarkGfm, remarkPullQuotes],
         rehypePlugins: [rehypeHeadings(toc), [rehypePrettyCode, {
           theme: codeTheme,
           keepBackground: false,

@@ -1,6 +1,7 @@
 ---
 title: '让网页安静下来：从减少一次等待开始'
 date: '2026-10-18'
+updated: '2026-10-21'
 summary: '性能优化不必从复杂的工具开始。一次请求、一张图片、一段多余的脚本，往往就是更好阅读体验的起点。'
 tags: ['前端', '工程实践']
 draft: false
@@ -26,6 +27,11 @@ draft: false
 
 对于博客，标题、日期和正文在发布时就已经确定。把这些工作放在构建阶段，通常比每次访问时重新计算更合适。
 
+<figure className="article-illustration">
+  <Image src="/illustrations/quiet-web.webp" alt="左侧多张网页与脚本、图片交织，经过一条简化的路径，右侧只留下清晰的阅读页面。" width={1200} height={600} />
+  <figcaption>把复杂留在构建时，让阅读从一张清晰的页面开始。</figcaption>
+</figure>
+
 ```tsx title="app/posts/page.tsx"
 export default function PostsPage() {
   const posts = getPublishedPosts();
@@ -50,7 +56,7 @@ export default function PostsPage() {
 
 ## 优化的终点是读者
 
-> 好的性能优化，最终应该体现为更少的打断，而不只是更漂亮的报告。
+<Pull>「优化的终点不是分数，是读者不再等待。」</Pull>
 
 我会保留一份优化前的记录，再在同样的网络和设备条件下重复测试。只改变一个因素，才更容易知道是哪一步带来了改善。
 

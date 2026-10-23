@@ -1,6 +1,6 @@
 # Hush · 思考与构建
 
-中文个人技术博客。Next.js 15 App Router、TypeScript strict、Tailwind CSS、Markdown / MDX；所有内容页和订阅在构建时生成，无数据库。
+中文个人技术博客。Next.js 15 App Router、TypeScript strict、Tailwind CSS、Markdown / MDX；内容页和订阅在构建时生成，匿名留言与文章评论可选接入 Supabase 托管存储。
 
 ## 1. 本地启动
 
@@ -11,7 +11,7 @@ pnpm install
 pnpm dev
 ```
 
-打开 [http://localhost:3000](http://localhost:3000)。先修改根目录 `site.config.ts` 中的作者、站点标题、描述、正式域名、头像和社交链接；头像默认使用内置字母图，不请求第三方服务。
+打开 <http://localhost:3000>。先修改根目录 `site.config.ts` 中的作者、站点标题、描述、正式域名、头像和社交链接；头像默认使用内置字母图，不请求第三方服务。
 
 ## 2. 写一篇文章
 
@@ -39,9 +39,9 @@ draft: false
 
 ## 3. 部署到 Vercel
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new)
+![Deploy with Vercel](https://vercel.com/button)
 
-将此仓库推送到你的 GitHub / GitLab / Bitbucket，在上方入口导入仓库并点击 **Deploy**。Vercel 会读取 `vercel.json`、Node 版本与 pnpm 锁文件，无须配置数据库或密钥。以后提交文章并推送到关联的生产分支，就会自动构建发布。
+将此仓库推送到你的 GitHub / GitLab / Bitbucket，在上方入口导入仓库并点击 **Deploy**。Vercel 会读取 `vercel.json`、Node 版本与 pnpm 锁文件。文章浏览无需数据库或密钥；开放匿名留言需按 [接入说明](docs/comments.md) 配置 Supabase。以后提交文章并推送到关联的生产分支，就会自动构建发布。
 
 上线前把 `site.config.ts` 的 `url` 从 `https://example.com` 改为正式域名并重新部署，它决定 canonical、Open Graph、RSS 和 sitemap 中的地址。当前按钮进入 Vercel 导入流程；关联真实 Git 仓库后，你也可以在 Vercel 项目中生成针对该仓库的克隆部署按钮。
 
@@ -69,6 +69,10 @@ tests/             Node 内置测试，无额外测试框架
 
 RSS：`/feed.xml`；站点地图：`/sitemap.xml`。主题按钮依次切换“跟随系统 → 浅色 → 深色”，选择保存在浏览器本地。375px 下代码与宽表格在容器内横向滚动，页面本身保持正常阅读宽度。
 
+完成封面进入后，本地记忆保留 7 天，期间刷新或打开新标签页会直接进入博客。页脚“重看封面”可随时重新体验；完成后重看参数会从地址中移除。持久化存储不可用时，尽量退回同一标签页记忆。
+
 标签保留中文展示，URL 采用稳定的 ASCII 转义（例如 `/tags/_E5_89_8D_E7_AB_AF`），规避 Next.js 15 的 Unicode 静态路径匹配问题。链接、canonical 与 sitemap 使用同一个转换函数，无须手动维护标签映射。
 
 Lighthouse 应在 `pnpm build && pnpm start` 的生产版本上验收，并在正式域名部署后复测；本地测量不能保证不同托管环境与设备始终得到相同分数。
+
+连续点击页头头像 8 次可以进入游戏小屋，第 5 次会有小提示。两个小游戏均支持五个关卡、无尽模式和七种留言动物角色；本机纪录开箱即用。线上排行榜沿用留言的 Supabase 环境变量，另执行 `supabase/arcade.sql`；规则、部署与审核方法见 [游戏说明](docs/arcade.md)。

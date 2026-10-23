@@ -6,3 +6,4 @@ out/
 .env*
 !.env.example
 qa-artifacts/
+dist/

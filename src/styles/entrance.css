@@ -1,0 +1,59 @@
+.home-entry { display: none; }
+:root[data-home-entry="pending"], :root[data-home-entry="leaving"] { overflow: hidden; scrollbar-gutter: stable; }
+:root[data-home-entry="pending"] :is(.site-header, .site-footer, .skip-link, .home-entry-content) { visibility: hidden; }
+:root[data-home-entry="leaving"] .skip-link { visibility: hidden; }
+:root:is([data-home-entry="pending"], [data-home-entry="leaving"]) .home-entry {
+  position: fixed;
+  inset: 0;
+  z-index: 55;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  padding: clamp(24px, 5vw, 64px);
+  background: var(--transparent);
+  isolation: isolate;
+  color: var(--foreground);
+  touch-action: pan-x pinch-zoom;
+}
+.home-entry::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--background); opacity: calc(1 - var(--entry-reveal, 0)); }
+.entry-top { display: flex; align-items: baseline; justify-content: space-between; gap: 20px; font-size: 12px; color: var(--muted); }
+.entry-top > :first-child { font-size: 21px; font-weight: 650; letter-spacing: -0.05em; color: var(--foreground); }
+.entry-scene { display: grid; grid-template-columns: 1.4fr 1fr; align-items: center; gap: 60px; width: min(100%, 1000px); margin-inline: auto; }
+.entry-title-stack { position: relative; display: inline-block; width: max-content; max-width: 100%; margin-top: 20px; font-family: var(--font-serif); font-size: clamp(48px, 7vw, 88px); font-weight: 500; line-height: 1.35; letter-spacing: -0.01em; text-align: left; transform-origin: top left; will-change: transform; }
+.entry-title-stack h1 { font: inherit; letter-spacing: inherit; margin: 0; white-space: nowrap; }
+.entry-title-character { position: relative; display: inline-block; }
+.entry-title-line { position: relative; display: block; color: var(--muted); }
+.entry-word-out { opacity: var(--entry-word-out, 1); }
+.entry-word-in { position: absolute; left: 0; top: 0; opacity: var(--entry-word-in, 0); }
+.entry-description { margin-top: 24px; font-size: 15px; color: var(--muted); }
+.entry-illustration { width: min(100%, 360px); height: auto; filter: brightness(5) saturate(0.3); transform-origin: top left; will-change: transform; }
+:root[data-theme="light"] .entry-illustration { filter: none; }
+.entry-bottom { display: grid; justify-items: center; gap: 12px; padding-top: 24px; }
+.entry-button { display: inline-flex; align-items: center; justify-content: space-between; gap: 36px; min-height: 48px; padding: 10px 22px; border: 1px solid var(--border-ui); border-radius: 6px; background: var(--background); color: var(--accent); font-size: 14px; }
+.entry-button:hover { color: var(--highlight); background: var(--surface); }
+.entry-bottom p { font-size: 12px; color: var(--muted); }
+.entry-swipe-hint { display: none; }
+:root:is([data-home-entry="pending"], [data-home-entry="leaving"]) .home-entry-content {
+  opacity: 1;
+}
+:root:is([data-home-entry="pending"], [data-home-entry="leaving"]) :is(.home-entry-content #intro-title, .home-entry-content .hero-illustration) { opacity: 0; }
+.entry-top, .entry-scene > div > .eyebrow, .entry-description { opacity: var(--entry-chrome, 1); }
+.entry-bottom p { opacity: var(--entry-chrome, 1); }
+:root:is([data-home-entry="pending"], [data-home-entry="leaving"]) :is(.hero-description, .hero-grid .text-link, .hero-note) { opacity: var(--entry-details, 0); }
+@media (max-width: 640px) {
+  .entry-scroll-hint { display: none; }
+  .entry-swipe-hint { display: inline; }
+  .entry-top { font-size: 11px; gap: 12px; }
+  .entry-scene { grid-template-columns: minmax(0, 1fr); justify-items: center; align-content: center; gap: 28px; text-align: center; }
+  .entry-title-stack { font-size: clamp(42px, 12vw, 56px); margin-top: 12px; }
+  .entry-description { font-size: 14px; margin-top: 16px; }
+  .entry-illustration { width: 200px; }
+  .entry-bottom { padding-bottom: env(safe-area-inset-bottom); }
+}
+@media (max-height: 560px) {
+  .entry-scene { grid-template-columns: 1.4fr 1fr; gap: 24px; text-align: left; }
+  .entry-title-stack { font-size: 36px; margin-top: 8px; }
+  .entry-scene .eyebrow { display: none; }
+  .entry-description { margin-top: 8px; font-size: 12px; }
+  .entry-illustration { width: 160px; }
+  .entry-bottom { gap: 6px; padding-top: 12px; }
+}

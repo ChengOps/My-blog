@@ -10,7 +10,7 @@ export default function AboutPage() {
   return (
     <div className="about-layout">
       <article>
-        <header className="page-heading pt-0"><p className="eyebrow">A LITTLE ABOUT ME / 关于我</p><h1>你好，我是 {siteConfig.name}。</h1><p>写代码，也写下代码之外的思考。</p></header>
+        <header className="page-heading pt-0"><p className="eyebrow">关于我</p><h1>你好，我是 {siteConfig.name}。</h1><p>写代码，也写下代码之外的思考。</p></header>
         <div className="prose">
           <p>欢迎来到我的个人博客。这里是一处慢慢整理的数字花园：有前端开发的实践，有与 AI 协作的探索，也有读书时留下的问题。</p>
           <h2>为什么写在这里</h2>
@@ -20,6 +20,7 @@ export default function AboutPage() {
           <ul><li>前端：页面体验、工程实践与可维护的代码。</li><li>AI：把工具放进真实工作流之后的观察与反思。</li><li>阅读：书页与生活之间，值得留下的联系。</li></ul>
           <h2>保持联系</h2>
           <p>如果某篇文章让你想到一个问题，欢迎通过<a href={`mailto:${siteConfig.email}`}>邮件</a>交流。也可以订阅 <a href="/feed.xml">RSS</a>，在自己喜欢的阅读器里接收更新。</p>
+          <p>也欢迎在<Link href="/guestbook">留言栏</Link>留一句话，或到文章下方继续讨论。</p>
         </div>
         <Link className="text-link inline-block mt-10" href="/posts">从一篇文章开始 →</Link>
       </article>

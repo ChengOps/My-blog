@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 import { siteConfig } from "../../site.config";
 import { getPalette } from "@/lib/palette";
 
-export const alt = "Hush · Code, AI & books";
+export const alt = `${siteConfig.name} · Code, AI & books`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 export const dynamic = "force-static";

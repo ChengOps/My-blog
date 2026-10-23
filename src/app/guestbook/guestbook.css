@@ -1,0 +1,110 @@
+.guestbook-page { max-width: none; display: grid; grid-template-columns: minmax(0, 320px) minmax(0, 1fr); align-items: start; gap: 72px; padding-top: 64px; }
+.guestbook-intro { position: sticky; top: 40px; padding: 0; animation: guestbook-arrive var(--dur-slow) var(--ease-feedback) both; }
+.guestbook-intro h1 { font-size: 40px; margin-block: 18px 22px; }
+.guestbook-intro > p:not(.eyebrow) { font-size: 15px; line-height: 1.9; }
+.guestbook-postmark { display: flex; align-items: center; gap: 20px; margin-block: 36px; color: var(--muted); font-size: 13px; line-height: 1.9; }
+.guestbook-postmark svg { transform: rotate(-8deg); transition: transform var(--dur-slow) var(--ease-feedback); }
+.guestbook-postmark:hover svg { transform: translateY(-4px) rotate(4deg); }
+.guestbook-guide { list-style: none; margin: 0; padding: 24px 0 0; border-top: 1px solid var(--border); display: grid; gap: 14px; color: var(--muted); font-size: 12px; }
+.guestbook-guide li { display: flex; align-items: center; gap: 14px; }
+.guestbook-guide li > span { font-variant-numeric: tabular-nums; font-size: 11px; }
+.guestbook-page .comments-panel { min-width: 0; padding-top: 0; border-top: 0; animation: guestbook-arrive var(--dur-slow) var(--ease-feedback) both; animation-delay: var(--dur-fast); }
+.guestbook-page .comments-heading { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 8px 20px; margin-bottom: 20px; }
+.guestbook-page .comments-heading h2 { font-size: 18px; }
+.guestbook-page .comments-heading p { margin: 0; font-size: 13px; }
+.guestbook-page .comments-notice { padding: 12px 0; margin-bottom: 20px; background: var(--transparent); border-inline: 0; border-radius: 0; font-size: 13px; animation: guestbook-arrive var(--dur-base) var(--ease-feedback) both; }
+.guestbook-page .comments-notice button { min-height: 44px; padding: 0 4px; }
+.guestbook-page .comment-form { position: relative; padding: 28px; border-radius: 12px; }
+.guestbook-page .comment-form::before { content: ""; position: absolute; inset: -1px; border: 1px solid var(--border-ui); border-radius: inherit; opacity: 0; pointer-events: none; transition: opacity var(--dur-base) var(--ease-feedback); }
+.guestbook-page .comment-form:focus-within::before { opacity: 1; }
+.guestbook-identity-preview { display: flex; align-items: center; gap: 12px; padding-bottom: 22px; margin-bottom: 22px; border-bottom: 1px solid var(--border); }
+.guestbook-identity-preview > .comment-avatar { flex-shrink: 0; animation: guestbook-avatar-arrive var(--dur-slow) var(--ease-feedback) both; }
+.guestbook-identity-preview > div { min-width: 0; }
+.guestbook-identity-preview strong { display: block; font-size: 14px; font-weight: 500; overflow-wrap: anywhere; }
+.guestbook-identity-preview p { margin-top: 3px; color: var(--muted); font-size: 12px; }
+.guestbook-paper-label { margin-left: auto; color: var(--muted); font-size: 11px; white-space: nowrap; }
+.guestbook-page .comment-name > span, .guestbook-page .comment-body-label { display: flex; align-items: center; gap: 10px; }
+.guestbook-page .comment-name > span::before, .guestbook-page .comment-body-label::before { font-size: 11px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.guestbook-page .comment-name > span::before { content: "01"; }
+.guestbook-page .comment-body-label::before { content: "02"; }
+.guestbook-page .comment-name input, .guestbook-page .comment-form textarea { border-color: var(--border); background: var(--background); transition: border-color var(--dur-base) var(--ease-feedback); }
+.guestbook-page .comment-name input:focus, .guestbook-page .comment-form textarea:focus { border-color: var(--accent); }
+.guestbook-page .comment-avatar-picker { margin-block: 20px 16px; }
+.guestbook-page .comment-avatar-picker legend { color: var(--muted); font-size: 12px; }
+.guestbook-page .comment-avatar-options { max-width: none; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 8px; }
+.guestbook-page .comment-avatar-option { padding: 12px 2px 9px; border-radius: 8px; transition: transform var(--dur-base) var(--ease-feedback), border-color var(--dur-base) var(--ease-feedback); }
+.guestbook-page .comment-avatar-option::after { content: ""; position: absolute; top: 5px; right: 7px; width: 5px; height: 8px; border-right: 1px solid var(--foreground); border-bottom: 1px solid var(--foreground); opacity: 0; transform: rotate(45deg) scale(0.5); transition: transform var(--dur-base) var(--ease-feedback), opacity var(--dur-base) var(--ease-feedback); }
+.guestbook-page .comment-avatar-option:has(input:checked)::after { opacity: 1; transform: rotate(45deg) scale(1); }
+.guestbook-page .comment-avatar-option:has(input:checked) .comment-avatar { animation: guestbook-avatar-select var(--dur-slow) var(--ease-feedback); }
+.guestbook-page .comment-avatar-option:active { transform: scale(0.96); }
+.guestbook-page .comment-remember { min-height: 28px; }
+.guestbook-page .comment-body-label { margin-top: 24px; }
+.guestbook-page .comment-form textarea { min-height: 160px; }
+.guestbook-page .comment-form-note { gap: 8px 16px; font-size: 11px; }
+.guestbook-page .comment-form-note > :last-child { margin-left: auto; font-variant-numeric: tabular-nums; }
+.guestbook-page .comment-submit { display: flex; align-items: center; justify-content: space-between; gap: 28px; margin-top: 22px; border-radius: 6px; }
+.guestbook-send-icon { transition: transform var(--dur-base) var(--ease-feedback); }
+.guestbook-page .comment-submit:hover:not(:disabled) .guestbook-send-icon { transform: translate(3px, -3px); }
+.guestbook-page .comment-error:not(:empty), .guestbook-page .comment-status:not(:empty), .guestbook-page .comments-empty, .guestbook-page .comment-item { animation: guestbook-arrive var(--dur-base) var(--ease-feedback) both; }
+.guestbook-page .comment-item { padding-block: 26px; }
+@keyframes guestbook-arrive { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes guestbook-avatar-arrive { from { opacity: 0; transform: translateY(5px) rotate(-10deg) scale(0.9); } to { opacity: 1; transform: translateY(0) rotate(0) scale(1); } }
+@keyframes guestbook-avatar-select { 0% { transform: scale(1); } 35% { transform: translateY(-4px) rotate(-5deg) scale(1.08); } 70% { transform: translateY(1px) rotate(2deg) scale(0.98); } 100% { transform: scale(1); } }
+@media (hover: hover) and (pointer: fine) {
+  .guestbook-page .comment-avatar-option:hover { transform: translateY(-3px); border-color: var(--border-ui); }
+}
+@media (max-width: 1000px) {
+  .guestbook-page { grid-template-columns: minmax(0, 1fr); max-width: 720px; gap: 32px; padding-top: 42px; }
+  .guestbook-intro { position: static; }
+  .guestbook-intro h1 { font-size: 36px; max-width: 14em; margin-block: 14px 16px; }
+  .guestbook-postmark { margin-block: 24px 0; }
+  .guestbook-postmark svg { width: 52px; height: 52px; }
+  .guestbook-guide { display: none; }
+}
+@media (max-width: 640px) {
+  .guestbook-page { gap: 28px; padding-top: 32px; }
+  .guestbook-intro h1 { font-size: 32px; }
+  .guestbook-intro > p:not(.eyebrow) { font-size: 14px; }
+  .guestbook-page .comment-form { padding: 18px; }
+  .guestbook-identity-preview { padding-bottom: 18px; margin-bottom: 18px; }
+  .guestbook-paper-label { display: none; }
+  .guestbook-page .comment-avatar-options { grid-template-columns: repeat(8, minmax(0, 1fr)); }
+  .guestbook-page .comment-avatar-option { grid-column: span 2; }
+  .guestbook-page .comment-avatar-option:nth-child(5) { grid-column: 2 / span 2; }
+  .guestbook-page .comment-avatar-option:nth-child(6) { grid-column: 4 / span 2; }
+  .guestbook-page .comment-avatar-option:nth-child(7) { grid-column: 6 / span 2; }
+  .guestbook-page .comment-form-note > :first-child { flex: 1; min-width: 0; word-break: keep-all; }
+  .guestbook-page .comment-submit { width: 100%; }
+  .guestbook-page .comment-form input, .guestbook-page .comment-form textarea { font-size: 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .guestbook-page .comment-avatar-option:hover, .guestbook-page .comment-avatar-option:active, .guestbook-postmark:hover svg, .guestbook-page .comment-submit:hover .guestbook-send-icon { transform: none; }
+}
+
+/* ── Giscus 留言板 ─────────────────────────────────────────────── */
+.giscus-board {
+  margin-top: 48px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+  min-height: 180px;
+}
+
+.giscus-board--pending {
+  display: grid;
+  gap: 10px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.giscus-board--pending p { margin: 0; }
+
+.giscus-board__hint { font-size: 13px; opacity: .75; }
+
+.giscus-board__hint code {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 12px;
+  padding: 1px 5px;
+  border-radius: 4px;
+  background: var(--surface-2);
+}

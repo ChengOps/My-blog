@@ -4,7 +4,7 @@ import { getPosts, getTags } from "../src/lib/posts.ts";
 import { tagPath } from "../src/lib/urls.ts";
 
 const routes = [
-  "/", "/posts", "/about",
+  "/", "/posts", "/about", "/guestbook",
   ...getPosts().map((post) => `/posts/${post.slug}`),
   ...getTags().map(({ tag }) => tagPath(tag)),
   "/feed.xml", "/sitemap.xml", "/robots.txt", "/opengraph-image",

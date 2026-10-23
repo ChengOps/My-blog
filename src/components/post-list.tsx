@@ -17,7 +17,7 @@ export function PostList({ posts }: { posts: Post[] }) {
               <span aria-hidden="true">·</span><span>{post.readingMinutes} 分钟阅读</span>
             </div>
           </div>
-          <span className="post-arrow" aria-hidden="true">↗</span>
+          <span className="post-arrow" aria-hidden="true">→</span>
         </article>
       ))}
     </div>

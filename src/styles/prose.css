@@ -1,12 +1,25 @@
 .article-page { padding-top: 48px; }
 .article-header { max-width: 68ch; padding-bottom: 40px; }
-.article-header h1 { font-size: clamp(30px, 4.5vw, 44px); line-height: 1.4; font-weight: 600; letter-spacing: -0.035em; margin: 16px 0; }
+.article-header > .text-link { display: inline-flex; align-items: center; min-height: 44px; padding-block: 10px; }
+.article-header h1 { font-family: var(--font-serif); font-size: clamp(30px, 4.5vw, 44px); line-height: 1.35; font-weight: 500; letter-spacing: -0.01em; margin: 16px 0; word-break: auto-phrase; }
 .article-summary { color: var(--muted); font-size: 17px; line-height: 1.75; }
 .article-body-layout { display: grid; grid-template-columns: minmax(0, 68ch) minmax(0, 200px); gap: 80px; border-top: 1px solid var(--border); padding-top: 40px; }
 .article-content { min-width: 0; grid-column: 1; grid-row: 1; }
-.prose { max-width: 68ch; font-size: 18px; line-height: 1.75; line-break: strict; }
+.prose { max-width: 68ch; font-size: 18px; line-height: 1.75; line-break: strict; counter-reset: section; }
 .prose > * + * { margin-top: 1.25em; }
-.prose h2 { font-size: 27px; font-weight: 600; line-height: 1.5; letter-spacing: -0.025em; margin-top: 2em; }
+.prose h2 { font-family: var(--font-serif); font-size: 27px; font-weight: 500; line-height: 1.35; letter-spacing: -0.01em; margin-top: 2em; counter-increment: section; }
+.article-page .prose h2::before {
+  content: counter(section, decimal-leading-zero);
+  display: inline-block;
+  margin-right: 0.8em;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-size: 0.5em;
+  font-weight: 400;
+  letter-spacing: 0;
+  color: var(--accent);
+  vertical-align: 0.35em;
+  font-variant-numeric: tabular-nums;
+}
 .prose h3 { font-size: 21px; font-weight: 600; margin-top: 1.8em; }
 .prose > :first-child { margin-top: 0; }
 .prose a { text-decoration: underline; }
@@ -16,6 +29,9 @@
 .prose li + li { margin-top: 0.5em; }
 .prose blockquote { margin-inline: 0; padding: 15px 22px; border-left: 3px solid var(--secondary); background: var(--surface); color: var(--muted); }
 .prose img { display: block; max-width: 100%; height: auto; border-radius: 6px; }
+.prose .article-illustration { margin-inline: 0; margin-block: 2em; }
+.article-illustration img { width: 100%; border-radius: 0; }
+.article-illustration figcaption { margin-top: 12px; color: var(--muted); font-size: 13px; line-height: 1.75; text-align: center; }
 .prose code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace; font-size: 0.85em; overflow-wrap: anywhere; }
 .prose :not(pre) > code { padding: 0.16em 0.35em; background: var(--surface); border: 1px solid var(--border); border-radius: 4px; }
 .prose pre { background: var(--code-background); color: var(--code-foreground); border: 1px solid var(--border); border-radius: 7px; padding: 20px; overflow-x: auto; max-width: 100%; font-size: 14px; line-height: 1.8; tab-size: 2; }
@@ -32,11 +48,36 @@
 .toc { position: sticky; top: 30px; align-self: start; font-size: 13px; grid-column: 2; grid-row: 1; }
 .toc summary { font-weight: 600; list-style: none; margin-bottom: 14px; cursor: pointer; }
 .toc summary::-webkit-details-marker { display: none; }
-.toc ol { list-style: none; border-left: 1px solid var(--border); padding: 0 0 0 16px; margin: 0; color: var(--muted); }
+.toc ol { position: relative; list-style: none; padding: 0 0 0 17px; margin: 0; color: var(--muted); }
+.toc ol::before { content: ""; position: absolute; left: 0; top: 0; width: 3px; height: 22px; background: var(--accent); opacity: 0; transform: translateY(var(--toc-offset, 0px)); transition: transform var(--dur-base) var(--ease-feedback); }
+.toc ol[data-active]::before { opacity: 1; }
+.toc a { color: var(--muted); }
+.toc a.is-active { color: var(--accent); }
 .toc li + li { margin-top: 10px; }
 .toc .toc-subheading { padding-left: 12px; font-size: 12px; }
+.article-signature { margin-top: 32px; font-family: var(--font-hand); font-size: 16px; color: var(--muted); }
 .article-end { color: var(--muted); font-size: 13px; margin-block: 48px; display: flex; align-items: center; gap: 10px; }
 .article-end span { color: var(--muted); }
+.post-updated { color: var(--accent); }
+.semantic-desktop { display: contents; }
+.semantic-mobile { display: none; }
+.prose .pull-quote {
+  margin-block: 2.2em;
+  padding-block: 1.1em;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  font-family: var(--font-serif);
+  font-size: 23px;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  color: var(--foreground);
+  text-wrap: balance;
+}
+.prose .pull-quote > * { margin: 0; font-size: inherit; line-height: inherit; }
+@media (min-width: 1024px) {
+  .prose .pull-quote { margin-left: -24px; padding-left: 24px; }
+}
 .post-navigation { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; padding-top: 26px; border-top: 1px solid var(--border); }
 .post-navigation span { color: var(--muted); font-size: 12px; display: block; margin-bottom: 8px; }
 .post-navigation strong { font-size: 15px; font-weight: 500; }
@@ -46,6 +87,7 @@
   .article-body-layout { grid-template-columns: minmax(0, 1fr); gap: 32px; }
   .article-header, .article-body-layout { max-width: 68ch; margin-inline: auto; }
   .toc { position: static; grid-column: 1; grid-row: auto; background: var(--surface); border: 1px solid var(--border); padding: 14px 18px; border-radius: 6px; }
+  .toc ol::before { display: none; }
   .article-content { grid-row: auto; }
   .toc summary::after { content: " ↕"; float: right; color: var(--muted); }
   .toc details:not([open]) summary { margin: 0; }
@@ -53,6 +95,18 @@
 @media (max-width: 640px) {
   .article-page { padding-top: 30px; }
   .article-header { padding-bottom: 28px; }
+  .article-header > .post-meta {
+    display: grid;
+    grid-template-columns: max-content max-content max-content minmax(0, 1fr);
+    gap: 6px 9px;
+    font-size: 13px;
+    color: var(--foreground);
+  }
+  .article-header .post-updated-separator { display: none; }
+  .article-header .post-updated { grid-column: 2 / -1; font-size: 12px; color: var(--muted); }
+  .article-header h1, .prose .pull-quote { word-break: keep-all; }
+  .semantic-desktop { display: none; }
+  .semantic-mobile { display: contents; }
   .article-body-layout { padding-top: 24px; }
   .prose { font-size: 17px; }
   .prose h2 { font-size: 24px; }

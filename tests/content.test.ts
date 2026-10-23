@@ -28,6 +28,17 @@ test("dates must be real calendar dates and use YYYY-MM-DD", () => {
   assert.equal(validateMetadata({ ...valid, date: new Date("2026-10-01") }, "test").date, "2026-10-01");
 });
 
+test("updated is optional, validates real dates, and cannot precede publication", () => {
+  assert.equal(validateMetadata(valid, "legacy.mdx").updated, undefined);
+  for (const updated of ["2026-02-30", "2026-13-01", "10/21/2026", "2026-2-1", "", null, 12, new Date("invalid"), "2026-09-30"]) {
+    assert.throws(() => validateMetadata({ ...valid, updated }, "example.mdx"), /example\.mdx:.*"updated"/);
+  }
+  assert.equal(validateMetadata({ ...valid, updated: valid.date }, "example.mdx").updated, valid.date);
+  assert.equal(validateMetadata({ ...valid, updated: "2026-10-21" }, "example.mdx").updated, "2026-10-21");
+  assert.equal(validateMetadata({ ...valid, updated: new Date("2026-10-21T00:00:00Z") }, "example.mdx").updated, "2026-10-21");
+  assert.equal(validateMetadata({ ...valid, date: "2024-02-28", updated: "2024-02-29" }, "leap.mdx").updated, "2024-02-29");
+});
+
 test("published collection excludes draft content, sorts dates, and rejects duplicate slugs", () => {
   const directory = mkdtempSync(path.join(tmpdir(), "blog-content-"));
   const article = (date: string, draft = false) => `---\ntitle: 文章\ndate: '${date}'\nsummary: 摘要\ntags: [前端]\ndraft: ${draft}\n---\n${draft ? "DRAFT_PRIVATE_MARKER" : "正文"}`;
